@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RestSharp;
+using TaskBroker.ApiAccessLayer;
+using TaskBroker.ConfigData;
+using TaskBroker.Services;
 
 
 namespace TaskBroker
@@ -17,6 +21,10 @@ namespace TaskBroker
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IConfigGetter, ConfigGetter>();
+            services.AddScoped<IRestApiCom, RestApiCom>();
+            services.AddScoped<ITaskBrokerService, TaskBrokerService>();
+            services.AddScoped<IRestClient, RestClient>();
 
             services.AddControllers();
             
